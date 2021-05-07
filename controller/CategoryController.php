@@ -118,6 +118,7 @@ class CategoryController
     private function handleValidationErrors($errors)
     {
         $data = [];
+
         foreach ($errors as $errors) {
             foreach ($errors as $validation) {
                 array_push($data, $validation);
