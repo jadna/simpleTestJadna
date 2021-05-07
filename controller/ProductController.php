@@ -51,6 +51,7 @@ class ProductController
     {
         $this->data = [];
         $catDAO = new CategoryDAO;
+        var_dump($catDAO);
 
         try {
             $categories = $catDAO->selectAll();

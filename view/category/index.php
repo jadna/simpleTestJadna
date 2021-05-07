@@ -30,12 +30,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $categories = $data['categories']; ?>
+                <?php $categories = $data['categories'];?>
                 <?php foreach ($categories as $category) : ?>
                     <tr>
                         <td><?php echo $category->getId(); ?></td>
                         <td><a href="index.php?category=show&id=<?php echo $category->getId(); ?>"><?= $category->getName(); ?></a></td>
-                        <td align="center">0</td>
+                        <td align="center"><?= $category->getProductsCount(); ?></td>
                         <td>
                             <a href="index.php?category=edit&id=<?= $category->getId(); ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#" class="delete" data-value="<?= $category->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

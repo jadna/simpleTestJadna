@@ -7,11 +7,16 @@ class CategoryDAO extends DAO
 {
     public function selectAll()
     {
-        $sql = "SELECT * FROM categories ORDER BY id";
+        $sql = "SELECT categories.id, categories.name, categories.description,
+                COUNT(products.id) as products_count
+                FROM categories 
+                LEFT JOIN products products ON (products.category_id = categories.id) 
+                GROUP BY categories.id
+                ORDER BY categories.id";
         try {
             $stmt = $this->connection->prepare($sql);
             $stmt->execute();
-            $categories = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Category', ['name', 'description', 'id']);
+            $categories = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Category', ['name', 'description', 'id','products_count']);
 
             return $categories;
         } catch (PDOException $e) {
@@ -60,8 +65,8 @@ class CategoryDAO extends DAO
     {
         $sql = "DELETE FROM categories WHERE id = :id";
         $stmt = $this->connection->prepare($sql);
-
-        $stmt->bindParam(':id', $id);
+        
+        $stmt->bindParam(':id', $id);   
 
         try {
             $stmt->execute();

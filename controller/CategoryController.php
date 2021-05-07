@@ -1,5 +1,6 @@
 <?php
-
+require_once "model/ProductDAO.php";
+require_once "model/Product.php";
 require_once "model/CategoryDAO.php";
 require_once "model/Category.php";
 require_once "view/View.php";
@@ -14,7 +15,8 @@ class CategoryController
     {
         $this->data = array();
         $catdao = new CategoryDAO();
-
+        $product = new ProductDAO();
+        
         try {
             $categories = $catdao->selectAll();
         } catch (PDOException $e) {
@@ -101,6 +103,10 @@ class CategoryController
     public function destroy($id)
     {
         $catdao = new CategoryDAO();
+        $product = new ProductDAO();
+
+        $product->countProducts($id);
+        var_dump($product); die();
         try {
             $catdao->delete($id);
             header('location: index.php?category=index');

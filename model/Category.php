@@ -5,12 +5,14 @@ class Category
     private $id;
     private $name;
     private $description;
+    private $products_count;
 
-    public function __construct($id = null, $name = null, $description = null)
+    public function __construct($id = null, $name = null, $description = null, $products_count = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->products_count = $products_count;
     }
 
     public function getId()
@@ -41,5 +43,15 @@ class Category
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function getProductsCount()
+    {
+        return $this->products_count;
+    }
+
+    public function setProductsCount($products_count)
+    {
+        $this->products_count = $products_count;
     }
 }
